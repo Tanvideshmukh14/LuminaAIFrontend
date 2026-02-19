@@ -10,15 +10,18 @@ function ChatBox({ setLoadingExternal }) {
   const [loading, setLoading] = useState(false);
   const bottomRef = useRef(null);
 
+  // Scroll to bottom when messages change
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, loading]);
 
+  // Send message function
   async function sendMessage(forcedText) {
     const messageText = forcedText ?? input;
     if (!messageText.trim() || loading) return;
 
-    const userMessage = { role: "user", message: content };
+    // Add user message to chat
+    const userMessage = { role: "user", message: messageText };
     setMessages((prev) => [...prev, userMessage]);
     setInput("");
     setLoading(true);
@@ -31,16 +34,18 @@ function ChatBox({ setLoadingExternal }) {
         body: JSON.stringify({
           user_id: USER_ID,
           question: messageText,
-          
         }),
       });
 
       const data = await res.json();
+
+      // Add assistant response
       setMessages((prev) => [
         ...prev,
         { role: "assistant", message: data.response },
       ]);
-    } catch {
+    } catch (err) {
+      console.error(err);
       setMessages((prev) => [
         ...prev,
         { role: "assistant", message: "Something went wrong. Please try again." },
@@ -53,7 +58,11 @@ function ChatBox({ setLoadingExternal }) {
 
   return (
     <>
-      <div className="chat-scroll" style={{ flex: 1, overflowY: "auto", padding: "10px 5px" }}>
+      {/* Chat Messages */}
+      <div
+        className="chat-scroll"
+        style={{ flex: 1, overflowY: "auto", padding: "10px 5px" }}
+      >
         {messages.map((m, i) => (
           <div
             key={i}
@@ -63,26 +72,29 @@ function ChatBox({ setLoadingExternal }) {
               justifyContent: m.role === "user" ? "flex-end" : "flex-start",
               marginBottom: "15px",
               alignItems: "flex-end",
-              gap: "8px"
+              gap: "8px",
             }}
           >
-            {/* Assistant Avatar Placeholder */}
-            {m.role === "assistant" && (
-              <div className="avatar-mini">⚡</div>
-            )}
-            
+            {m.role === "assistant" && <div className="avatar-mini">⚡</div>}
+
             <span
               style={{
                 padding: "12px 18px",
-                borderRadius: m.role === "user" ? "20px 20px 4px 20px" : "20px 20px 20px 4px",
+                borderRadius:
+                  m.role === "user"
+                    ? "20px 20px 4px 20px"
+                    : "20px 20px 20px 4px",
                 maxWidth: "80%",
                 fontSize: "15px",
                 lineHeight: "1.4",
-                background: m.role === "user" ? "rgba(77, 182, 172, 0.4)" : "rgba(255, 255, 255, 0.6)",
+                background:
+                  m.role === "user"
+                    ? "rgba(77, 182, 172, 0.4)"
+                    : "rgba(255, 255, 255, 0.6)",
                 backdropFilter: "blur(5px)",
                 border: "1px solid rgba(255,255,255,0.3)",
                 color: "#2c3e50",
-                boxShadow: "0 4px 15px rgba(0,0,0,0.03)"
+                boxShadow: "0 4px 15px rgba(0,0,0,0.03)",
               }}
             >
               {m.message}
@@ -93,23 +105,32 @@ function ChatBox({ setLoadingExternal }) {
         <div ref={bottomRef} />
       </div>
 
-      {/* Quick Actions Component */}
+      {/* Quick Actions Buttons */}
       <QuickActions onSelect={sendMessage} />
 
       {/* Input Area */}
-      <div className="input-container">
-        <button className="icon-btn">+</button>
-       <input
-  name="message"
-  value={input}
-  onChange={(e) => setInput(e.target.value)}
-  onKeyDown={(e) => e.key === "Enter" && sendMessage()} // ✅
-  placeholder="Ask Lumina about your diet..."
-/>
-        <button className="send-btn" onClick={() => sendMessage()} disabled={loading}>
+      <form
+        className="input-container"
+        onSubmit={(e) => {
+          e.preventDefault();
+          sendMessage();
+        }}
+        style={{ display: "flex", gap: "8px" }}
+      >
+        <button className="icon-btn" type="button">
+          +
+        </button>
+        <input
+          name="message"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          placeholder="Ask Lumina about your diet..."
+          style={{ flex: 1, padding: "8px 12px" }}
+        />
+        <button className="send-btn" type="submit" disabled={loading}>
           &#10148;
         </button>
-      </div>
+      </form>
     </>
   );
 }
