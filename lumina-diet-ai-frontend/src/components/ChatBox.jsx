@@ -3,8 +3,14 @@ import { API_URL } from "../services/api";
 import QuickActions from "./QuickActions";
 import ReactMarkdown from "react-markdown";
 import "../styles/index.css";
+const USER_ID =
+  localStorage.getItem("lumina_user_id") ||
+  (() => {
+    const id = crypto.randomUUID();
+    localStorage.setItem("lumina_user_id", id);
+    return id;
+  })();
 
-const USER_ID = "lumina-user-001";
 function cleanAIResponse(text) {
   // 1. Remove Markdown table pipes
   let cleaned = text.replace(/\|/g, ""); // removes all '|'
