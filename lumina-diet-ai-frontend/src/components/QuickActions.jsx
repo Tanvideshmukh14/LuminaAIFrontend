@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import "../styles/index.css";
 
 const actions = [
   "Suggest today’s meals",
@@ -10,34 +11,12 @@ const actions = [
 
 function QuickActions({ onSelect }) {
   return (
-    <div
-      style={{
-        display: "flex",
-        gap: "10px",
-        overflowX: "auto",
-        paddingBottom: "6px",
-        marginBottom: "10px",
-        scrollbarWidth: "none",       
-        msOverflowStyle: "none",  
-        WebkitOverflowScrolling: "touch", 
-      }}
-    >
+    <div className="quick-actions">
       {actions.map((text, i) => (
         <motion.button
           key={i}
           whileTap={{ scale: 0.95 }}
           onClick={() => onSelect(text)}
-          style={{
-            whiteSpace: "nowrap",
-            padding: "8px 14px",
-            borderRadius: "999px",
-            border: "none",
-            cursor: "pointer",
-            background: "rgba(255,255,255,0.45)",
-            backdropFilter: "blur(10px)",
-            fontSize: "13px",
-            fontWeight: 500,
-          }}
         >
           {text}
         </motion.button>
