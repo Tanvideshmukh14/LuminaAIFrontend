@@ -18,7 +18,7 @@ function ChatBox({ setLoadingExternal }) {
     const messageText = forcedText ?? input;
     if (!messageText.trim() || loading) return;
 
-    const userMessage = { role: "user", message: messageText };
+    const userMessage = { role: "user", message: content };
     setMessages((prev) => [...prev, userMessage]);
     setInput("");
     setLoading(true);
@@ -31,14 +31,14 @@ function ChatBox({ setLoadingExternal }) {
         body: JSON.stringify({
           user_id: USER_ID,
           question: messageText,
-         Liam: "diet-ai" 
+          
         }),
       });
 
       const data = await res.json();
       setMessages((prev) => [
         ...prev,
-        { role: "assistant", message: data.message },
+        { role: "assistant", message: data.response },
       ]);
     } catch {
       setMessages((prev) => [
@@ -100,6 +100,7 @@ function ChatBox({ setLoadingExternal }) {
       <div className="input-container">
         <button className="icon-btn">+</button>
         <input
+         name = "message"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && sendMessage()}
