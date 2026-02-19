@@ -36,7 +36,7 @@ function ChatBox({ setLoadingExternal }) {
   const [messages, setMessages] = useState([
     {
       role: "assistant",
-      message: "Hi! 👋 I’m your AI diet assistant assistant. What’s your name?"
+      message: "Hi! 👋 I’m your AI diet assistant. What’s your name?"
     }
   ]);
   const [input, setInput] = useState("");
