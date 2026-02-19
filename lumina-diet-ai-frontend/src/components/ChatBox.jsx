@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { API_URL } from "../services/api";
 import QuickActions from "./QuickActions";
+import ReactMarkdown from "react-markdown"; // ✅ import react-markdown
 
 const USER_ID = "lumina-user-001";
 
@@ -48,7 +49,10 @@ function ChatBox({ setLoadingExternal }) {
       console.error(err);
       setMessages((prev) => [
         ...prev,
-        { role: "assistant", message: "Something went wrong. Please try again." },
+        {
+          role: "assistant",
+          message: "Something went wrong. Please try again.",
+        },
       ]);
     } finally {
       setLoading(false);
@@ -97,7 +101,11 @@ function ChatBox({ setLoadingExternal }) {
                 boxShadow: "0 4px 15px rgba(0,0,0,0.03)",
               }}
             >
-              {m.message}
+              {m.role === "assistant" ? (
+                <ReactMarkdown>{m.message}</ReactMarkdown> // ✅ render Markdown
+              ) : (
+                m.message
+              )}
             </span>
           </div>
         ))}
