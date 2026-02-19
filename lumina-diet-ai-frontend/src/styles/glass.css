@@ -1,80 +1,19 @@
-/* UPDATED BACKGROUND */
-body {
-  margin: 0;
-  padding: 0;
-  min-height: 100vh;
-  /* Soft base color */
-  background-color: #e0f2f1; 
-  /* Fallback gradient */
-  background: linear-gradient(135deg, #f9fbe7 0%, #b2dfdb 100%);
-  
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow-x: hidden;
-  position: relative;
-  color: #1f2937;
-}
-
-/* THE "RIBBON" SHAPES */
-body::before,
-body::after {
-  content: "";
-  position: fixed;
-  width: 140vw;
-  height: 140vh;
-  top: -20vh;
-  left: -20vw;
-  z-index: -1;
-  opacity: 0.6;
-}
-
-/* Top Ribbon (Greenish Wave) */
-body::before {
-  background: radial-gradient(circle at 30% 20%, #98d66b 0%, transparent 50%);
-  border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
-  filter: blur(80px);
-  animation: wave 20s infinite alternate ease-in-out;
-}
-
-/* Bottom Ribbon (Blueish Wave) */
-body::after {
-  background: radial-gradient(circle at 70% 80%, #4db6ac 0%, transparent 50%);
-  border-radius: 50% 50% 30% 70% / 50% 30% 70% 50%;
-  filter: blur(90px);
-  animation: wave 25s infinite alternate-reverse ease-in-out;
-  left: auto;
-  right: -30vw;
-}
-
-/* Subtle animation to make the ribbons feel "alive" */
-@keyframes wave {
-  from { transform: translate(0, 0) rotate(0deg); }
-  to { transform: translate(5%, 5%) rotate(5deg); }
-}
-
-/* GLASS CARD REFINEMENT */
 .glass-card {
-  width: 100%;
-  max-width: 760px;
-  /* Changed from 100vh to fit content better with margin */
-  min-height: 85vh; 
-  margin: 20px;
+  width: min(760px, 95vw);
+  height: min(680px, 92vh);
+  margin: 20px auto;
 
-  background: rgba(255, 255, 255, 0.25);
-  backdrop-filter: blur(30px);
-  -webkit-backdrop-filter: blur(30px);
+  background: rgba(255, 255, 255, 0.28);
+  backdrop-filter: blur(26px);
+  -webkit-backdrop-filter: blur(26px);
 
-  border-radius: 32px;
-  /* Lighter, thinner border for a more realistic glass look */
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.45);
 
-  box-shadow:
-    0 20px 50px rgba(0, 0, 0, 0.05),
-    inset 0 0 20px rgba(255, 255, 255, 0.2);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.08),
+              inset 0 0 30px rgba(255, 255, 255, 0.35);
 
-  padding: 24px;
+  padding: clamp(16px, 2vw, 22px);
   display: flex;
   flex-direction: column;
-  z-index: 1; /* Stay above the pseudo-elements */
 }
