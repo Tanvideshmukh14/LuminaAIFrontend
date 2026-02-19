@@ -50,6 +50,15 @@ function ChatBox({ setLoadingExternal }) {
     setInput("");
     setLoading(true);
     setLoadingExternal(true);
+const res = await fetch(API_URL, {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ user_id: USER_ID, question: messageText }),
+});
+
+if (!res.ok) {
+  throw new Error("Server error: " + res.status);
+}
 
     try {
       const res = await fetch(API_URL, {
