@@ -99,13 +99,13 @@ function ChatBox({ setLoadingExternal }) {
       {/* Input Area */}
       <div className="input-container">
         <button className="icon-btn">+</button>
-        <input
-         name = "message"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyDown={(e) => e.key === "Enter" && sendMessage()}
-          placeholder="Ask Lumina about your diet..."
-        />
+       <input
+  name="message"
+  value={input}
+  onChange={(e) => setInput(e.target.value)}
+  onKeyDown={(e) => e.key === "Enter" && sendMessage()} // ✅
+  placeholder="Ask Lumina about your diet..."
+/>
         <button className="send-btn" onClick={() => sendMessage()} disabled={loading}>
           &#10148;
         </button>
