@@ -5,6 +5,26 @@ import ReactMarkdown from "react-markdown";
 import "../styles/index.css";
 
 const USER_ID = "lumina-user-001";
+function cleanAIResponse(text) {
+  // 1. Remove Markdown table pipes
+  let cleaned = text.replace(/\|/g, ""); // removes all '|'
+
+  // 2. Replace table headers and dividers with line breaks
+  cleaned = cleaned.replace(/(-+\s*)+/g, "\n");
+
+  // 3. Replace multiple line breaks with 2 line breaks
+  cleaned = cleaned.replace(/\n{2,}/g, "\n\n");
+
+  return cleaned;
+}
+function formatTablesAsLists(text) {
+  return text
+    // Replace table rows with dash bullets
+    .replace(/\|.*\|.*\|.*\|/g, (match) => {
+      const parts = match.split("|").map((p) => p.trim()).filter(Boolean);
+      return parts.length ? "- " + parts.join(" | ") : "";
+    });
+}
 
 function ChatBox({ setLoadingExternal }) {
   const [messages, setMessages] = useState([
@@ -39,10 +59,12 @@ function ChatBox({ setLoadingExternal }) {
       });
 
       const data = await res.json();
+      const formatted = cleanAIResponse(data.response);
+      const finalText = formatTablesAsLists(formatted);
 
       setMessages((prev) => [
         ...prev,
-        { role: "assistant", message: data.response },
+        { role: "assistant", message: finalText },
       ]);
     } catch (err) {
       console.error(err);
