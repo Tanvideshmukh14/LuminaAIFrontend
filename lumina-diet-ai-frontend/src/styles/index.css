@@ -145,15 +145,50 @@ body::after {
   word-break: break-word;
 }
 
+/* User bubble */
 .message-bubble.user {
   border-radius: 20px 20px 4px 20px;
   background: rgba(240, 238, 241, 0.4);
 }
 
+/* Assistant bubble */
 .message-bubble.assistant {
   background: rgba(255, 255, 255, 0.8);
 }
 
+/* ================= CODE BLOCK FIX ================= */
+
+/* Inline code */
+.message-bubble code {
+  background: rgba(0, 0, 0, 0.06);
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-size: 0.9em;
+  word-break: break-word;
+}
+
+/* Code blocks */
+.message-bubble pre {
+  max-width: 100%;
+  overflow-x: auto;
+  padding: 12px;
+  margin-top: 8px;
+
+  background: #f4f4f6;
+  border-radius: 12px;
+
+  white-space: pre-wrap;   
+  word-break: break-word;
+}
+
+/* Code text inside block */
+.message-bubble pre code {
+  background: none;
+  padding: 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #1f2937;
+}
 /* Avatar */
 .avatar-mini {
   width: 30px;
