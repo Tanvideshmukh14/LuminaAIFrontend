@@ -170,7 +170,7 @@ body::after {
 /* Loading */
 .loading-text {
   font-size: 12px;
-  color: #666;
+  color: #bfbfbf;
   margin-left: 38px;
   font-style: italic;
 }
