@@ -2,11 +2,11 @@ import { motion } from "framer-motion";
 import "../styles/index.css";
 
 const actions = [
-  "Suggest today’s meals",
-  "Healthy dinner ideas",
-  "Calorie deficit plan",
-  "High-protein foods",
-  "Vegan options",
+  "Refactor for performance",
+  "Audit security risks",
+  "Generate unit tests",
+  "Explain this module",
+  "Mordernize syntax",
 ];
 
 function QuickActions({ onSelect }) {

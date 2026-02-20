@@ -36,7 +36,7 @@ function ChatBox({ setLoadingExternal }) {
   const [messages, setMessages] = useState([
     {
       role: "assistant",
-      message: "Hi! 👋 I’m your AI diet assistant. What’s your name?"
+      message: "Hi! 👋 I’m Lumina, your AI assistant. What’s your name?"
     }
   ]);
   const [input, setInput] = useState("");
@@ -114,7 +114,7 @@ function ChatBox({ setLoadingExternal }) {
           name="message"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder="Ask Lumina about your diet..."
+          placeholder="Describe a feature or paste a snippet..."
         />
         <button className="send-btn" type="submit" disabled={loading}>
           &#10148;

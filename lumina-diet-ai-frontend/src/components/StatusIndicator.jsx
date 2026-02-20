@@ -6,10 +6,10 @@ function StatusIndicator({ loading }) {
     <motion.div className="status-indicator" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
       {loading ? (
         <motion.span animate={{ opacity: [0.4, 1, 0.4] }} transition={{ duration: 1.6, repeat: Infinity }}>
-          Lumina is tailoring your plan…
+          Lumina is processing your request…
         </motion.span>
       ) : (
-        <span>Your personal nutrition specialist</span>
+        <span>The Core Engine of Developer Productivity</span>
       )}
     </motion.div>
   );

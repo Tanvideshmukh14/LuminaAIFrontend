@@ -8,7 +8,7 @@ function GlassCard() {
 
   return (
     <div className="glass-card">
-      <h2>Lumina Diet AI</h2>
+      <h2>Lumina AI</h2>
       <StatusIndicator loading={loading} />
       <ChatBox setLoadingExternal={setLoading} />
     </div>
